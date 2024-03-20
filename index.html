@@ -3,17 +3,51 @@
 <!--이 부분은 주석문입니다. 웹 브라우저는 주석을 화면에 출력하지 않습니다.-->
 <html>
     <head>
+        <meta name="kimhyerin" content="20230985">
+        <meta name="keywords" content="computer">
+        <base href="http://127.0.0.1:5500">
         <meta charset="UTF-8">
         <title>LOL 메인화면</title>
+        <style>
+            table {
+                font-size: 20pt;
+                color: deeppink;
+            }
+        </style>
+        <!--디자인의 컨텐츠는 헤더에서 로딩이 되어야지 디자인이 적용됨.-->
     </head>
     <body style="background-color: black;">
         <div style="display: flex; justify-content: center;">
             <img src="image/lol_logo.webp" width="60" height="65">
-            <h3 style="font-size: 24px; font-weight: bold; font-style: italic; color: deeppink; font-family: '굴림';">게임정보 | 기본정보 | 챔피언 | 패치 노트 | 새소식 | 다운로드</h3>
+            <h3 style="font-size: 24px; font-weight: bold; font-style: italic; color: deeppink; font-family: '굴림';"><a href="https://www.leagueoflegends.com/ko-kr/how-to-play/" target="_blank">게임정보</a> | 기본정보 | 챔피언 | 패치 노트 | 새소식 | 다운로드</h3>
         </div>
         <hr>
         <div style="display: flex; justify-content: center;">
         <img src="image/imglol.jpg" width="1200" height="768">
+        </div>
+        <div style="display: flex; justify-content: center;">
+            <table border="1">
+                <caption>인기 캐릭터</caption>
+                <tbody>
+                    <tr bgcolor="red">
+                        <td width="80" rowspan="2">사이온</td>
+                        <td>아리</td>
+                        <td>가렌</td>
+                        <td>가렌2</td>
+                        <td>가렌3</td>
+                    </tr>
+                    <tr bgcolor="blue">
+                        <td>아리</td>
+                        <td>가렌</td>
+                        <td>가렌2</td>
+                        <td>가렌3</td>
+                    </tr>
+                    <td bgcolor="grey"><b>카직스</b></td>
+                        <td>루시안</td>
+                        <td>루시안2</td>
+                        <td colspan="2"></td>
+                </tbody>
+            </table>
         </div>
         <hr>
         <div style="display: flex; justify-content: center;">
