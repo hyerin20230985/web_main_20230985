@@ -20,16 +20,19 @@
         </style>
         <!--디자인의 컨텐츠는 헤더에서 로딩이 되어야지 디자인이 적용됨.-->
       <script type="text/javascript" src="js/text.js" defer></script>
+      <script type="text/javascript" src="js/data_type.js" defer></script>
+      <script type="text/javascript" src="js/pop_up.js" defer></script>
+      <script type="text/javascript" src="js/search.js" defer></script>
       <!--자바 스크립트-->
     </head>
     <body style="background-color: black;">
+      <body style="background-color: black;" onload="pop_up();"></body>
         <nav class="navbar bg-dark border-bottom border-body" data-bs-theme="dark">
             <div class="container-fluid">
               <nav class="navbar bg-body-tertiary">
                 <div class="container-fluid">
                   <a class="navbar-brand" href="#">
-                    <img src="image/lol_logo.webp" alt="Logo" width="70" height="64" class="d-inline-block align-text-top">
-                    <!--나레이션바에 이미지 넣는거-->
+                    <img src="image/lol_logo.webp" alt="Logo" width="70" height="64" class="d-inline-block align-text-top" onmouseover="over(this)" onmouseout="out(this)">
                   </a>
                 </div>
               </nav>
@@ -68,17 +71,21 @@
               </div>
               <nav class="navbar bg-body-tertiary">
                 <div class="container-fluid">
-                  <form class="d-flex" role="search">
+                 <!-- <form class="d-flex" role="search">
                     <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
                     <button class="btn btn-outline-success" id="search_btn" type="submit">검색하기</button>
-                  </form>
+                  </form>-->
+                  <form class="d-flex" role="search" onsubmit="return googleSearch();">
+                    <input class="form-control me-2" id="search_input" name="q" type="search" placeholder="키워드 입력" aria-label="Search">
+                    <button class="btn btn-outline-success" id="search_btn" type="submit">검색하기</button>
+                    <a href="login/login.html" class="btn btn-outline-success" id="login_btn">로그인 하기</a>
+                  </form>               
                 </div>
               </nav>
             </div>
-          </nav>
-
+          </nav>           
         <div style="display: flex; justify-content: center;">
-            <img src="image/lol_logoss.jpg" width="160" height="70">
+            <img src="image/lol_logoss.jpg" width="160" height="70" onmouseover="over(this)" onmouseout="out(this)" >
             <h3 style="font-size: 24px; font-weight: bold; font-style: italic; color: whitesmoke; font-family: '굴림';"><a href="https://www.leagueoflegends.com/ko-kr/how-to-play/" target="_blank">홈페이지</a> | <a href="https://www.leagueoflegends.com/ko-kr/how-to-play/" target="_blank">기본정보</a> | <a href="https://www.leagueoflegends.com/ko-kr/champions/" target="_blank">챔피언</a> | 패치 노트 | 새소식 | 다운로드</h3>
         </div>
         <hr>

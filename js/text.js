@@ -2,6 +2,10 @@ var jb = 'hi'; // 변수 선언 후 주석 가능(한줄 주석)
 var a = 1;
 var b;
 b = 5;
+const search_message = () => {
+    const c = '검색을 수행합니다';
+    alert(c);
+    };
 if (true) {
     let c = 'let 접근';
     var c_1 = 'var 접근';
@@ -22,6 +26,6 @@ document.getElementById("search_btn").addEventListener('click', search_message);
 //addEventListener로 이벤트를 등록한다.
 //click 은 마우스 이벤트의 한 종류
 //search_message는 함수이다.
-function search_message(){
+/*function search_message(){
 alert("검색을 수행합니다!");
-}
+}*/
