@@ -1,4 +1,5 @@
-const check_input = () => {
+const check_input = () => { 
+    const idsave_check = document.getElementById('idSaveCheck');
     const loginForm = document.getElementById('login_form');
     const loginBtn = document.getElementById('login_btn');
     const emailInput = document.getElementById('typeEmailX');
@@ -20,6 +21,15 @@ const check_input = () => {
     
     console.log('이메일:', emailValue);
     console.log('비밀번호:', passwordValue);
+    if(idsave_check.checked == true) { // 아이디 체크 o
+        alert("쿠키를 저장합니다.", emailValue);
+        setCookie("id", emailValue, 1); // 1일 저장
+        alert("쿠키 값 :" + emailValue);
+    }
+    else
+    { // 아이디 체크 x
+        setCookie("id", emailValue.value, 0); //날짜를 0 - 쿠키 삭제
+    }
     loginForm.submit();
     //document.getElementById('login_form').submit();
     };
