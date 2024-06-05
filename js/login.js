@@ -1,5 +1,18 @@
+function addJavascript(jsname) { // 자바스크립트 외부 연동
+	var th = document.getElementsByTagName('head')[0];
+	var s = document.createElement('script');
+	s.setAttribute('type','text/javascript');
+	s.setAttribute('src',jsname);
+	th.appendChild(s);
+}
+addJavascript('/js/security.js'); // 암복호화 함수
+addJavascript('/js/session.js'); // 세션 함수
+addJavascript('/js/cookie.js'); // 쿠키 함수
+
+ 
+ const idsave_check = document.getElementById('idSaveCheck');
+
 const check_input = () => { 
-    const idsave_check = document.getElementById('idSaveCheck');
     const loginForm = document.getElementById('login_form');
     const loginBtn = document.getElementById('login_btn');
     const emailInput = document.getElementById('typeEmailX');
@@ -8,6 +21,20 @@ const check_input = () => {
     alert(c);
     const emailValue = emailInput.value.trim();
     const passwordValue = passwordInput.value.trim();
+
+    const sanitizedPassword = check_xss(passwordValue);
+// check_xss 함수로 비밀번호 Sanitize
+    const sanitizedEmail = check_xss(emailValue);
+// check_xss 함수로 비밀번호 Sanitize
+    if (!sanitizedEmail) {
+// Sanitize된 비밀번호 사용
+        return false;
+    }
+    if (!sanitizedPassword) {
+// Sanitize된 비밀번호 사용
+        return false;
+    }   
+
     
     if (emailValue === '') {
     alert('이메일을 입력하세요.');
@@ -21,34 +48,6 @@ const check_input = () => {
     
     console.log('이메일:', emailValue);
     console.log('비밀번호:', passwordValue);
-
-    function setCookie(name, value, expiredays) {
-        var date = new Date();
-        date.setDate(date.getDate() + expiredays);
-        document.cookie = escape(name) + "=" + escape(value) + "; expires=" + date.toUTCString() + "; path=/";
-    }
-    
-    function getCookie(name) {
-        var cookie = document.cookie;
-        console.log("쿠키를 요청합니다.");
-        if (cookie != "") {
-            var cookie_array = cookie.split("; ");
-            for ( var index in cookie_array) {
-                var cookie_name = cookie_array[index].split("=");
-                if (cookie_name[0] == "id") {
-                    return cookie_name[1];
-                }
-            }   
-        }
-        return ;
-        }
-        function closePopup() {
-            if (document.getElementById('check_login').value) {
-                setCookie("id", "N", 1);
-                console.log("쿠키를 설정합니다.");
-                self.close();
-            }
-        }
    
     if(idsave_check.checked == true) { // 아이디 체크 o
         alert("쿠키를 저장합니다.", emailValue);
@@ -84,46 +83,6 @@ const check_input = () => {
         }
     }
 
-
-    function session_set() { //세션 저장
-        let session_id = document.querySelector("#typeEmailX");
-        let session_pass = document.querySelector("#typePasswordX"); // DOM 트리에서 pass 검색
-        if (sessionStorage) {
-            let en_text = encrypt_text(session_pass.value);
-            sessionStorage.setItem("Session_Storage_id", session_id.value);
-            sessionStorage.setItem("Session_Storage_pass", en_text);
-        } 
-        else {
-            alert("로컬 스토리지 지원 x");
-        }
-    }
-
-    function session_get() { //세션 읽기
-        if (sessionStorage) {
-            return sessionStorage.getItem("Session_Storage_pass");
-        } 
-        else {
-            alert("세션 스토리지 지원 x");
-        }
-    }
-
-    function session_check() { //세션 검사
-        if (sessionStorage.getItem("Session_Storage_id")) {
-            alert("이미 로그인 되었습니다.");
-            location.href='../login/index_login.html'; // 로그인된 페이지로 이동
-        }
-    }
-    
-    function encodeByAES256(key, data){
-        const cipher = CryptoJS.AES.encrypt(data, CryptoJS.enc.Utf8.parse(key), 
-        {
-            iv: CryptoJS.enc.Utf8.parse(""),
-            padding: CryptoJS.pad.Pkcs7,
-            mode: CryptoJS.mode.CBC
-        });
-        return cipher.toString();
-    }
-    
     function decodeByAES256(key, data){
         const cipher = CryptoJS.AES.decrypt(data, CryptoJS.enc.Utf8.parse(key), {
             iv: CryptoJS.enc.Utf8.parse(""),
@@ -151,3 +110,6 @@ const check_input = () => {
     }
     
     document.getElementById("login_btn").addEventListener('click', check_input);
+
+
+    
